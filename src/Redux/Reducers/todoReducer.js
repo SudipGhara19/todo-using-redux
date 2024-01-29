@@ -7,7 +7,7 @@ const initialState = {
 
 
 //Reducer Function
-function todoReducer(state=initialState, action){
+export function todoReducer(state=initialState, action){
 
     switch(action.type){
 

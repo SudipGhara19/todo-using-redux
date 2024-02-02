@@ -1,42 +1,37 @@
-import { ADD_TODO, TOGGLE_TODO } from "../Actions/todoActions";
 
-//creating initial state
-const initialState = {
-    todos: [
-        {"text": "meeting at 9"},
-        {"text": "office at 11"},
+import { ADD_TODO, TOGGLE_TODO } from "../actions/todoActions";
+
+const initialState={
+    todos:[
+        {text:"Go to Gym at 6", completed: false},
+        {text: "Study at 8", completed: true}
     ]
-};
+}
 
-
-//Reducer Function
 export function todoReducer(state=initialState, action){
 
     switch(action.type){
-
         case ADD_TODO:
-            return{
+            return {
                 ...state,
                 todos:[
-                    ...state,
+                    ...state.todos,
                     {
-                        text: action.text,
+                        text:action.text,
                         completed: false
                     }
                 ]
             }
-
         case TOGGLE_TODO:
             return{
                 ...state,
-                todos: state.todos.map((todo, i)=> {
-                    if(i === action.index){
-                        todo.completed =! todo.completed;
+                todos: state.todos.map((todo, i)=>{
+                    if(i===action.index){
+                        todo.completed=!todo.completed
                     }
                     return todo;
                 })
             }
-        
         default:
             return state;
     }

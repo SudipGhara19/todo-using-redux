@@ -30,6 +30,8 @@ const noteSlice = createSlice({
     }
 })
 
+export const noteReducer = noteSlice.reducer;
+
 
 
 

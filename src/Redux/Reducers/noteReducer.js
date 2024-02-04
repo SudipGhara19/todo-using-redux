@@ -34,6 +34,8 @@ export const noteReducer = noteSlice.reducer;
 
 export const action = noteSlice.actions;
 
+export const noteSelector = (state) => state.noteReducer.notes;
+
 
 
 

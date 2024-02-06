@@ -18,29 +18,29 @@ import {noteActions}  from "./noteReducer";
     //     "todo/add":(state,action) => {
     //         state.message = "New Todo is craeted !";
     //     },
-
-    //     "note/add":(state, action) => {
-    //         state.message = "New Note is Added !"
-    //     },
-
-    //     "note/delete":(state, action) => {
-    //         state.message = "Note Successfully Deleted !";
-    //     }
     // }
 
     //USING BUILDER 
-    extraReducers:(builder) => {
-        builder.addCase(todoActions.add, (state, action) => {
-            state.message = "New Todo added !";
-        })
+    // extraReducers:(builder) => {
+    //     builder.addCase(todoActions.add, (state, action) => {
+    //         state.message = "New Todo added !";
+    //     })
+    // }
 
-        builder.addCase(noteActions.add, (state, action) => {
-            state.message = "New Note is Added !";
-        })
 
-        builder.addCase(noteActions.delete, (state, action)=> {
-            state.message = "Note is Successfully Deleted !";
-        })
+    //map objects: [key]: value
+    extraReducers:{
+        [todoActions.add]: (state, action) => {
+            state.message = "New Todo Added!"
+        },
+
+        [noteActions.add]: (state, action) => {
+            state.message = "New Note Added !"
+        },
+
+        [noteActions.delete]: (state, action) => {
+            state.message = "Note Deleted Successfully !"
+        }
     }
  });
 

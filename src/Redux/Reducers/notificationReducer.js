@@ -8,7 +8,9 @@ import { createSlice } from "@reduxjs/toolkit"
     name: "notification",
     initialState,
     reducers:{
-
+        reset:(state, action) => {
+            state.message = "";
+        }
     },
     extraReducers:{
         "todo/add":(state,action) => {
@@ -19,3 +21,4 @@ import { createSlice } from "@reduxjs/toolkit"
 
  export const notificationReducer = notificationSlice.reducer;
  export const notificationSelector = (state) => state.notificationReducer.message;
+ export const notificationReset = notificationSlice.actions.reset;

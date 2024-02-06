@@ -4,12 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import {action} from "../../redux/reducers/todoReducer"
 
 import "./ToDoForm.css";
-import { notificationSelector } from "../../redux/reducers/notificationReducer";
+import { notificationSelector, notificationReset } from "../../redux/reducers/notificationReducer";
 
 function ToDoForm() {
   const [todoText, setTodoText] = useState("");
   const disptach = useDispatch();
   const message = useSelector(notificationSelector);
+
+
+  //reset messege to empty again after 3 seconds
+  if(message){
+    setTimeout(()=>{
+      disptach(notificationReset());
+    }, 3000);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();

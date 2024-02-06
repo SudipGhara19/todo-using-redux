@@ -15,6 +15,14 @@ import { createSlice } from "@reduxjs/toolkit"
     extraReducers:{
         "todo/add":(state,action) => {
             state.message = "New Todo is craeted !";
+        },
+
+        "note/add":(state, action) => {
+            state.message = "New Note is Added !"
+        },
+
+        "note/delete":(state, action) => {
+            state.message = "Note Successfully Deleted !";
         }
     }
  });

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { addNote } from "../../redux/actions/noteActions";
 import "./NoteForm.css";
-import {action} from "../../redux/reducers/noteReducer";
+import {noteActions} from "../../redux/reducers/noteReducer";
 import { notificationSelector, notificationReset } from "../../redux/reducers/notificationReducer";
 
 function NoteForm() {
@@ -19,7 +19,7 @@ function NoteForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(action.add(noteText));
+    dispatch(noteActions.add(noteText));
     setNoteText("");
   };
 
@@ -27,7 +27,7 @@ function NoteForm() {
     <div className="container">
 
       {/* for push the notification in the form container */}
-      { message && <div class="alert alert-success" role="alert">
+      { message && <div className="alert alert-success" role="alert">
       {message}
         </div>}
       

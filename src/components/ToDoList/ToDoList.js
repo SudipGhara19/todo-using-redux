@@ -2,14 +2,23 @@ import { useSelector, useDispatch } from "react-redux";
 // import { toggleTodo } from "../../redux/actions/todoActions";
 import {todoActions} from "../../redux/reducers/todoReducer"
 import { todoSelector } from "../../redux/reducers/todoReducer";
+import axios from "axios";
 
 import "./ToDoList.css";
+import { useEffect } from "react";
 
 function ToDoList() {
 
   const todos=useSelector(todoSelector);
   const disptach = useDispatch();
   // const todos= store.getState().todos;
+
+  useEffect(() => {
+    axios.get("https://dummyjson.com/todos")
+      .then(res => {
+        console.log(res.data);
+      })
+  })
 
   return (
     <div className="container">

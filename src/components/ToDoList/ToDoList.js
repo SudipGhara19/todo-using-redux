@@ -10,13 +10,14 @@ import { useEffect } from "react";
 function ToDoList() {
 
   const todos=useSelector(todoSelector);
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   // const todos= store.getState().todos;
 
   useEffect(() => {
     axios.get("https://dummyjson.com/todos")
       .then(res => {
         console.log(res.data);
+        dispatch(todoActions.initialState(res.data))
       })
   })
 
@@ -30,7 +31,7 @@ function ToDoList() {
           <button className="btn btn-warning"
           onClick={()=>{
             // console.log("[LOG]: Todo-Toggle Action Dispatched")
-            disptach(todoActions.toggle(index))}}
+            dispatch(todoActions.toggle(index))}}
           >Toggle</button>
           </li>
       ))}

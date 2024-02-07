@@ -16,11 +16,16 @@ const todoSlice = createSlice({
     name:'todo',
     initialState: initialState,
     reducers:{
+        //get the data from api and update it into the state
+        initialState:(state, action) => {
+            // state.todos = [...action.payload];
+        },
+        
         //this is add Action
         add:(state, action) => {
             state.todos.push({
                 text: action.payload,
-                completed: false
+                completed: false,
             })
         },
 

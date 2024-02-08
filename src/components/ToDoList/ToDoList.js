@@ -19,7 +19,7 @@ function ToDoList() {
         console.log(res.data);
         dispatch(todoActions.initialState(res.data))
       })
-  })
+  },[])
 
   return (
     <div className="container">

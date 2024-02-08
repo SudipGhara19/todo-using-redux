@@ -1,8 +1,21 @@
-
+import { createAsyncThunk } from "@reduxjs/toolkit"
+import axios from "axios"
 // import { ADD_TODO, TOGGLE_TODO } from "../actions/todoActions";
-
-
 import { createSlice } from "@reduxjs/toolkit"
+
+
+
+export const getInitialStateAsync = createAsyncThunk('todo/getIntialState', 
+    (arg, thunkAPI) => {
+        axios.get("https://dummyjson.com/todos")
+            .then(res => {
+            console.log(res.data);
+            // dispatch(todoActions.initialState(res.data))
+            thunkAPI.dispatch(todoActions.initialState(res.data))
+      })
+    }
+)
+
 
 const initialState={
     todos:[
@@ -20,7 +33,7 @@ const todoSlice = createSlice({
         initialState:(state, action) => {
             // state.todos = [...action.payload];
         },
-        
+
         //this is add Action
         add:(state, action) => {
             state.todos.push({

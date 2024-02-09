@@ -21,6 +21,24 @@ export const getInitialStateAsync = createAsyncThunk('todo/getIntialState',
 )
 
 
+//post todo in API
+export const addTodoAsync = createAsyncThunk("todo/addTodo", async(payload) => {
+    const response = await fetch('https://dummyjson.com/todos', {
+        method: "POST",
+        headers: {
+            "content-type":"application/json"
+        },
+        body: JSON.stringify({
+                id: Math.random(),
+                todo: payload,
+                completed: false,
+                userId: Math.random(),
+        })
+    });
+    return response.json();
+})
+
+
 const initialState={
     todos:[
         {id: 0, todo:"Go to Gym at 6", completed: false, userId: 80},
@@ -65,6 +83,10 @@ const todoSlice = createSlice({
             state.todos = [...action.payload.data.todos];
             // console.log("extra Reducer in Todo Reducer");
             
+        })
+
+        .addCase(addTodoAsync.fulfilled, (state, action) => {
+            state.todos.push(action.payload);
         })
     }
 })

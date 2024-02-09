@@ -6,21 +6,25 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 export const getInitialStateAsync = createAsyncThunk('todo/getIntialState', 
-    (arg, thunkAPI) => {
-        axios.get("https://dummyjson.com/todos")
-            .then(res => {
-            console.log(res.data);
-            // dispatch(todoActions.initialState(res.data))
-            thunkAPI.dispatch(todoActions.initialState(res.data))
-      })
+    // (arg, thunkAPI) => {
+    //     axios.get("https://dummyjson.com/todos")
+    //         .then(res => {
+    //         console.log(res.data);
+    //         // dispatch(todoActions.initialState(res.data))
+    //         thunkAPI.dispatch(todoActions.initialState(res.data))
+    //   })
+    // }
+
+    () => {
+        return axios.get('https://dummyjson.com/todos');
     }
 )
 
 
 const initialState={
     todos:[
-        {text:"Go to Gym at 6", completed: false},
-        {text: "Study at 8", completed: true}
+        {id: 0, todo:"Go to Gym at 6", completed: false, userId: 80},
+       
     ]
 }
 
@@ -31,14 +35,16 @@ const todoSlice = createSlice({
     reducers:{
         //get the data from api and update it into the state
         initialState:(state, action) => {
-            // state.todos = [...action.payload];
+            state.todos = [...action.payload];
         },
 
         //this is add Action
         add:(state, action) => {
             state.todos.push({
-                text: action.payload,
+                id: Math.random(),
+                todo: action.payload,
                 completed: false,
+                userId: Math.random(),
             })
         },
 
@@ -51,6 +57,15 @@ const todoSlice = createSlice({
                 return todo;
             })
         }
+    },
+
+    extraReducers:(builder) => {
+        builder.addCase(getInitialStateAsync.fulfilled, (state, action) => {
+            // console.log(action.payload.data);
+            state.todos = [...action.payload.data.todos];
+            // console.log("extra Reducer in Todo Reducer");
+            
+        })
     }
 })
 
